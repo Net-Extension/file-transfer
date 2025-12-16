@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Factory and DI registration for FileTransfer library</Description>
+    <PackageId>FileTransfer.Factory</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FileTransfer.Core\FileTransfer.Core.csproj" />
+    <ProjectReference Include="..\FileTransfer.Security\FileTransfer.Security.csproj" />
+    <ProjectReference Include="..\FileTransfer.Compression\FileTransfer.Compression.csproj" />
+    <ProjectReference Include="..\FileTransfer.Auditing\FileTransfer.Auditing.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>

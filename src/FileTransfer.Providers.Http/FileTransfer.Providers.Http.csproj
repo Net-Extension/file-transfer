@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>HTTP/HTTPS provider for FileTransfer library</Description>
+    <PackageId>FileTransfer.Providers.Http</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FileTransfer.Core\FileTransfer.Core.csproj" />
+    <ProjectReference Include="..\FileTransfer.Security\FileTransfer.Security.csproj" />
+    <ProjectReference Include="..\FileTransfer.Compression\FileTransfer.Compression.csproj" />
+    <ProjectReference Include="..\FileTransfer.Auditing\FileTransfer.Auditing.csproj" />
+  </ItemGroup>
+
+</Project>

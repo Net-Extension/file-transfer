@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Security features for FileTransfer library including encryption, signing, and credential management</Description>
+    <PackageId>FileTransfer.Security</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FileTransfer.Core\FileTransfer.Core.csproj" />
+  </ItemGroup>
+
+</Project>

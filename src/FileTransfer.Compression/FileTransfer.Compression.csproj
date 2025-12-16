@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Compression support for FileTransfer library with built-in gzip and zip support</Description>
+    <PackageId>FileTransfer.Compression</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FileTransfer.Core\FileTransfer.Core.csproj" />
+  </ItemGroup>
+
+</Project>

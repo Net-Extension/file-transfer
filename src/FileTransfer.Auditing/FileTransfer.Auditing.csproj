@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Auditing and logging infrastructure for FileTransfer library</Description>
+    <PackageId>FileTransfer.Auditing</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FileTransfer.Core\FileTransfer.Core.csproj" />
+  </ItemGroup>
+
+</Project>

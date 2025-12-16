@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Custom provider template for FileTransfer library</Description>
+    <PackageId>FileTransfer.Providers.Custom</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FileTransfer.Core\FileTransfer.Core.csproj" />
+    <ProjectReference Include="..\FileTransfer.Security\FileTransfer.Security.csproj" />
+    <ProjectReference Include="..\FileTransfer.Compression\FileTransfer.Compression.csproj" />
+    <ProjectReference Include="..\FileTransfer.Auditing\FileTransfer.Auditing.csproj" />
+  </ItemGroup>
+
+</Project>

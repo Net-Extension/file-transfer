@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>FTP provider for FileTransfer library</Description>
+    <PackageId>FileTransfer.Providers.Ftp</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FileTransfer.Core\FileTransfer.Core.csproj" />
+    <ProjectReference Include="..\FileTransfer.Security\FileTransfer.Security.csproj" />
+    <ProjectReference Include="..\FileTransfer.Compression\FileTransfer.Compression.csproj" />
+    <ProjectReference Include="..\FileTransfer.Auditing\FileTransfer.Auditing.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentFTP" Version="49.0.2" />
+  </ItemGroup>
+
+</Project>
