@@ -4,7 +4,7 @@ A modular, enterprise-grade file transfer library for .NET 8 with Clean Architec
 
 ## Features
 
-- **Multiple Protocol Support**: HTTP/HTTPS, FTP, SFTP, SCP, WebSocket, and extensible custom providers
+- **Multiple Protocol Support**: HTTP/HTTPS, FTP, SFTP, SCP, WebSocket, Axway MFT, and extensible custom providers
 - **Production-Ready**: Comprehensive error handling, retry policies, validation, and resilience
 - **Security First**: Built-in encryption (AES-GCM), TLS support, credential management, and secret redaction
 - **Progress Tracking**: Real-time progress reporting with callbacks and `IProgress<T>` support
@@ -33,6 +33,7 @@ dotnet add package FileTransfer.Providers.Ftp
 dotnet add package FileTransfer.Providers.Sftp
 dotnet add package FileTransfer.Providers.Scp
 dotnet add package FileTransfer.Providers.WebSocket
+dotnet add package FileTransfer.Providers.Axway
 ```
 
 ### Basic Usage
@@ -52,7 +53,13 @@ services.AddLogging(builder => builder.AddConsole());
 services.AddFileTransfer()
     .AddHttpProvider()
     .AddFtpProvider()
-    .AddSftpProvider();
+    .AddSftpProvider()
+    .AddAxwayProvider(config =>
+    {
+        config.ApiBaseUrl = "https://your-instance.axway.com/api/v2";
+        config.AuthType = AxwayAuthType.ApiKey;
+        config.ApiKey = "your-api-key";
+    });
 
 var serviceProvider = services.BuildServiceProvider();
 var transferClient = serviceProvider.GetRequiredService<IFileTransferClient>();
@@ -243,6 +250,62 @@ public partial class MainForm : Form
 ```
 
 ## Advanced Features
+
+### Axway Managed File Transfer (MFT)
+
+The Axway provider supports enterprise MFT solutions with REST API integration:
+
+```csharp
+// Configure Axway provider
+services.AddFileTransfer()
+    .AddAxwayProvider(config =>
+    {
+        config.ApiBaseUrl = "https://your-instance.axway.com/api/v2";
+        config.AuthType = AxwayAuthType.ApiKey;
+        config.ApiKey = "your-api-key";
+        config.TenantId = "your-tenant-id"; // For multi-tenant instances
+        config.EnableWorkflowTriggers = true;
+        config.ApplicationName = "MyApp";
+    });
+
+// Upload to Axway with metadata
+var request = new TransferRequest
+{
+    Source = "local-file.txt",
+    Destination = "axway://documents/uploads/file.txt",
+    Metadata = new Dictionary<string, string>
+    {
+        ["ContentType"] = "text/plain",
+        ["WorkflowId"] = "auto-process-workflow",
+        ["Axway.Department"] = "Finance",
+        ["Axway.Priority"] = "High",
+        ["Axway.ExpirationDays"] = "30"
+    }
+};
+
+var result = await transferClient.UploadAsync(request);
+
+// Get Axway file ID from result
+var axwayFileId = result.Metadata["AxwayFileId"];
+
+// Download from Axway using file ID
+var downloadRequest = new TransferRequest
+{
+    Source = $"axway://fileid/{axwayFileId}",
+    Destination = "downloaded-file.txt"
+};
+
+await transferClient.DownloadAsync(downloadRequest);
+```
+
+**Axway Features:**
+- REST API integration with SecureTransport and MFT solutions
+- Multipart upload for large files
+- Workflow trigger support on upload
+- Custom metadata attributes
+- File expiration management
+- OAuth and API key authentication
+- Multi-tenant support
 
 ### Encryption
 
@@ -529,8 +592,9 @@ services.AddOpenTelemetry()
 - `System.Diagnostics.DiagnosticSource` (8.0.0)
 
 ### Provider-Specific Dependencies
-- **FTP**: `FluentFTP` (49.0.2)
-- **SFTP/SCP**: `SSH.NET` (2024.1.0)
+- **FTP**: `FluentFTP` (49.0.2) - Robust FTP/FTPS library
+- **SFTP/SCP**: `SSH.NET` (2024.1.0) - Industry-standard SSH library
+- **Axway**: Uses built-in `HttpClient` for REST API integration
 
 All dependencies are carefully selected and justified:
 - FluentFTP: Robust, actively maintained FTP/FTPS library

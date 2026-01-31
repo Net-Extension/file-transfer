@@ -102,6 +102,24 @@ public static class ServiceCollectionExtensions
     }
 
     /// <summary>
+    /// Adds Axway Managed File Transfer (MFT) support.
+    /// </summary>
+    /// <param name="builder">The file transfer builder.</param>
+    /// <param name="configureOptions">Optional configuration callback for Axway settings.</param>
+    public static IFileTransferBuilder AddAxwayProvider(this IFileTransferBuilder builder, Action<Providers.Axway.AxwayConfiguration>? configureOptions = null)
+    {
+        builder.Services.AddHttpClient("FileTransfer.Axway");
+        builder.Services.AddTransient<ITransferProvider, Providers.Axway.AxwayTransferProvider>();
+
+        if (configureOptions != null)
+        {
+            builder.Services.Configure(configureOptions);
+        }
+
+        return builder;
+    }
+
+    /// <summary>
     /// Adds all available providers.
     /// </summary>
     public static IFileTransferBuilder AddAllProviders(this IFileTransferBuilder builder)

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Axway Managed File Transfer (MFT) provider for FileTransfer library</Description>
+    <PackageId>FileTransfer.Providers.Axway</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FileTransfer.Core\FileTransfer.Core.csproj" />
+    <ProjectReference Include="..\FileTransfer.Security\FileTransfer.Security.csproj" />
+    <ProjectReference Include="..\FileTransfer.Compression\FileTransfer.Compression.csproj" />
+    <ProjectReference Include="..\FileTransfer.Auditing\FileTransfer.Auditing.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>
